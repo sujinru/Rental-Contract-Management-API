@@ -32,6 +32,12 @@ Managing rental contracts and tracking revenue can be a cumbersome process, ofte
 
 ## Timeline
 
+### Done as of May 26
+- Set up project structure and dependencies
+- Implement user authentication and authorization
+- Design and implement data models for contracts, landlords, and tenants
+- Implement CRUD routes for managing contracts
+
 ### Week 8
 - Set up project structure and dependencies
 - Implement user authentication and authorization
