@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const contractSchema = new mongoose.Schema({
-    tenant: { type: String, required: true, unique: true},
+    tenant: { type: String, required: true},
     value: {
         type: Number,
         required: true,
@@ -38,4 +38,4 @@ const contractSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("users", contractSchema);
+module.exports = mongoose.model("contract", contractSchema);

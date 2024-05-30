@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const authDAO = require("../daos/auth");
 const contractDAO = require("../daos/contract");
+const contractsDAO = require("../daos/contract");
 
 let secret = "Secret: Nobody can know this";
 let adminSecret = "Super Secret: Only Admins can know this";
@@ -46,7 +47,6 @@ const isTenant = (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
     const { email, password, adminKey } = req.body;
-
     const userDuplicate = await authDAO.getUser(email);
     if (userDuplicate) {
         res.status(409).send("User already exists");
@@ -69,13 +69,12 @@ router.post("/signup", async (req, res, next) => {
         } else {
             user = await authDAO.signup(email, password, "tenant");
         }
-
     }
 
     if (user) {
         res.status(200).send(user);
     } else {
-        res.sendStatus(400);
+        res.status(400).send("Unsuccessful sign up");
     }
 });
 
@@ -86,6 +85,9 @@ router.post("/login", async (req, res, next) => {
         return;
     }
     const user = await authDAO.getUser(email)
+    if (!user){
+        res.status(401).send("User not found");
+    }
     const storedHash = user.password;
     const valid = await bcrypt.compare(password, storedHash);
     if (valid) {
@@ -109,6 +111,11 @@ router.get("/tenants", async (req, res, next) => {
 
 router.get("/landlords", async (req, res, next) => {
     const users = await authDAO.getAllUsersByRole("landlord");
+    res.json(users);
+});
+
+router.get("/users", async (req, res, next) => {
+    const users = await authDAO.getAllUsers();
     res.json(users);
 });
 

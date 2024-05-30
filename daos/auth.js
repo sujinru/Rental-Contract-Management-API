@@ -6,21 +6,14 @@ module.exports.signup = async (email, password, role) => {
         return null;
     }
 
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({
-            email: email,
-            password: hashedPassword,
-            role: role,
-        })
-        const savedUser = await user.save();
-        return savedUser;
-    } catch (error) {
-        if (error.message.includes('duplicate key error')) {
-            return null;
-        }
-        throw error;
-    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+        email: email,
+        password: hashedPassword,
+        role: role,
+    })
+    const savedUser = await user.save();
+    return savedUser;
 }
 
 module.exports.getUser = async (email) => {
@@ -30,6 +23,10 @@ module.exports.getUser = async (email) => {
         throw error;
     }
 };
+
+module.exports.getAllUsers = async () => {
+    return await User.find({});
+}
 
 module.exports.getAllUsersByRole = async (role) => {
     try {

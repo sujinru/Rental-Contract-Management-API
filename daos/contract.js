@@ -8,6 +8,10 @@ module.exports.getContracts = async () => {
     return Contract.find({});
 }
 
-module.exports.getContractByTenant = async (tenant) => {
-    return Contract.find({ tenant });
+module.exports.getContractByTenant = async (email) => {
+    return Contract.findOne({ tenant: email });
+}
+
+module.exports.deleteAllContracts = async () => {
+    return Contract.deleteMany();
 }
