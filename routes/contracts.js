@@ -74,4 +74,14 @@ router.delete('/all', isAuthorized, isLandlord, async (req, res, next) => {
     res.sendStatus(200);
 });
 
+router.get("/validContracts", isAuthorized, isLandlord, async (req, res, next) => {
+    const contracts = await contractsDAO.getValidContracts()
+    res.json(contracts);
+});
+
+router.get("/ContractValue", isAuthorized, isLandlord, async (req, res, next) => {
+    const contracts = await contractsDAO.getContractValue()
+    res.json(contracts);
+});
+
 module.exports = router;

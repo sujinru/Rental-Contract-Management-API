@@ -37,10 +37,10 @@ module.exports.getAllUsersByRole = async (role) => {
     }
 }
 
-module.exports.deleteAllUsers = async () => {
+module.exports.deleteUserByEmail = async (email) => {
     try {
-        return await User.deleteMany();
+        return await User.deleteOne(email);
     } catch (error) {
-        throw error;
+        throw error
     }
 }

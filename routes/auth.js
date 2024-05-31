@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const authDAO = require("../daos/auth");
 const contractDAO = require("../daos/contract");
-const contractsDAO = require("../daos/contract");
 
 let secret = "Secret: Nobody can know this";
 let adminSecret = "Super Secret: Only Admins can know this";
@@ -102,26 +101,6 @@ router.post("/login", async (req, res, next) => {
     } else {
         res.sendStatus(401);
     }
-});
-
-router.get("/tenants", async (req, res, next) => {
-    const users = await authDAO.getAllUsersByRole("tenant");
-    res.json(users);
-});
-
-router.get("/landlords", async (req, res, next) => {
-    const users = await authDAO.getAllUsersByRole("landlord");
-    res.json(users);
-});
-
-router.get("/users", async (req, res, next) => {
-    const users = await authDAO.getAllUsers();
-    res.json(users);
-});
-
-router.delete("/", async (req, res, next) => {
-    const users = await authDAO.deleteAllUsers();
-    res.json(users);
 });
 
 module.exports = {
