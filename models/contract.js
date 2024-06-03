@@ -35,6 +35,12 @@ const contractSchema = new mongoose.Schema({
             },
             message: '{VALUE} is not an integer value between 1 and 10'
         },
+    },
+    signed_date:{
+        type: Date,
+        required: function() {
+            return this.status === 'signed'
+        }
     }
 });
 

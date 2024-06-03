@@ -9,17 +9,23 @@ Managing rental contracts and tracking revenue can be a cumbersome process, ofte
 ## Technical Components
 
 ### Routes
-- `POST /contracts`: Create a new rental contract
-- `GET /contracts`: Retrieve a list of all contracts
-- `GET /contracts/:id`: Retrieve a specific contract by ID
-- `PUT /contracts/:id`: Update a specific contract by ID
-- `DELETE /contracts/:id`: Delete a specific contract by ID
-- `POST /contracts/:id/sign`: Tenant signs a specific contract
-- `POST /contracts/:id/reject`: Tenant rejects a specific contract
-- `GET /revenue`: Retrieve projected revenue based on signed contracts
+- `POST /contracts/create`: Add a contract
+- `GET /contracts`: Get all contracts
+- `PUT /contracts/reject`: Reject a contract
+- `PUT /contracts/sign`: Sign a contract
+- `PUT /contracts/update`: Modify a contract
+- `DELETE /contracts/one`: Remove a contract by tenant
+- `GET /contracts/ValidContracts`: Get valid contracts
+- `GET /contracts/ContractValue`: Get contract value
+
+- `POST /user/signup`: Sign up a new user
+- `POST /user/login`: Log in a user
+- `GET /user/tenants`: Get all tenants
+- `GET /user/landlords`: Get all landlords
+- `DELETE /user`: Delete a user by email
 
 ### Data Models
-- `Contract`: Stores information about rental contracts, including property details, rent amount, start and end dates, tenant information, and contract status (signed or unsigned).
+- `Contract`: Stores information about rental contracts, including property details, rent amount, term, tenant information, and contract status (signed or unsigned).
 - `Landlord`: Stores landlord information, including authentication credentials.
 - `Tenant`: Stores tenant information, including authentication credentials.
 

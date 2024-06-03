@@ -4,9 +4,6 @@ const contractsDAO = require('../daos/contract');
 const {isAuthorized, isTenant, isLandlord} = require('./auth')
 
 router.post('/create', isAuthorized, isLandlord, async (req, res, next) => {
-    for (let key in req.body) {
-        console.log(`Key: ${key}, Value: ${req.body[key]}`);
-    }
     const newContract = await contractsDAO.addContract(req.body);
     res.status(200).json(newContract);
 });
@@ -33,6 +30,7 @@ router.put('/sign', isAuthorized, isTenant, async (req, res, next) => {
         res.status(404).send("Contract not found");
     } else {
         contract.status = "signed";
+        contract.signed_date = new Date();
         await contract.save();
         res.sendStatus(200);
     }
@@ -69,19 +67,22 @@ router.delete('/one', isAuthorized, isLandlord, async (req, res, next) => {
     }
 });
 
-router.delete('/all', isAuthorized, isLandlord, async (req, res, next) => {
-    await contractsDAO.deleteAllContracts();
-    res.sendStatus(200);
+router.get("/ValidContracts", isAuthorized, isLandlord, async (req, res, next) => {
+    const term = req.body.term;
+    const contracts = await contractsDAO.getContractsByTerm({term: term, today: new Date() });
+    res.json(contracts);
 });
 
-router.get("/validContracts", isAuthorized, isLandlord, async (req, res, next) => {
-    const contracts = await contractsDAO.getValidContracts()
+router.get("/ExpiredContracts", isAuthorized, isLandlord, async (req, res, next) => {
+    const contracts = await contractsDAO.getExpiredContracts({today: new Date() });
     res.json(contracts);
 });
 
 router.get("/ContractValue", isAuthorized, isLandlord, async (req, res, next) => {
-    const contracts = await contractsDAO.getContractValue()
-    res.json(contracts);
+    const term = req.body.term;
+    const values = await contractsDAO.getContractValueByTerm({term: term, today: new Date()});
+    res.json(values);
 });
+
 
 module.exports = router;

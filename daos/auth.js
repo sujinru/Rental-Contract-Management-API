@@ -30,7 +30,6 @@ module.exports.getAllUsers = async () => {
 
 module.exports.getAllUsersByRole = async (role) => {
     try {
-        // find users whose role is equal to the role passed in
         return await User.find({ role });
     } catch (error) {
         throw error;
