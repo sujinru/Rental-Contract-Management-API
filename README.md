@@ -16,6 +16,7 @@ Managing rental contracts and tracking revenue can be a cumbersome process, ofte
 - `PUT /contracts/update`: Modify a contract
 - `DELETE /contracts/one`: Remove a contract by tenant
 - `GET /contracts/ValidContracts`: Get valid contracts
+- `GET /contracts/ExpiredContracts`: Get expired contracts
 - `GET /contracts/ContractValue`: Get contract value
 
 - `POST /user/signup`: Sign up a new user
