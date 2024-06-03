@@ -49,6 +49,7 @@ router.post("/login", async (req, res, next) => {
     const user = await authDAO.getUser(email)
     if (!user){
         res.status(401).send("User not found");
+        return;
     }
     const storedHash = user.password;
     const valid = await bcrypt.compare(password, storedHash);

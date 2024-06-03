@@ -12,6 +12,10 @@ module.exports.getContractByTenant = async (email) => {
     return Contract.findOne({ tenant: email });
 }
 
+module.exports.deleteContractByTenant = async (email) => {
+    return Contract.deleteOne({ tenant: email});
+}
+
 module.exports.getContractValueByTerm = async ({term, today}) => {
     if (term === undefined) {
         term = 100000;

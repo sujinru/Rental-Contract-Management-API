@@ -58,11 +58,10 @@ router.put('/update', isAuthorized, isLandlord, async (req, res, next) => {
 });
 
 router.delete('/one', isAuthorized, isLandlord, async (req, res, next) => {
-    const contract = await contractsDAO.getContractByTenant(req.body.tenant);
-    if (!contract) {
-        res.status(404).send("Contract not found");
+    const deletedContract = await contractsDAO.deleteContractByTenant(req.body.tenant);
+    if (deletedContract.deletedCount === 0) {
+        res.status(500).send("Failed to delete contract");
     } else {
-        await contract.delete();
         res.sendStatus(200);
     }
 });
