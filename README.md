@@ -17,7 +17,7 @@ Managing rental contracts and tracking revenue can be a cumbersome process, ofte
 - `DELETE /contracts/one`: Remove a contract by tenant
 - `GET /contracts/ValidContracts`: Get valid contracts
 - `GET /contracts/ExpiredContracts`: Get expired contracts
-- `GET /contracts/ContractValue`: Get contract value
+- `GET /contracts/ContractValue`: Get valid contracts and sum up the total value 
 
 - `POST /user/signup`: Sign up a new user
 - `POST /user/login`: Log in a user
@@ -31,35 +31,23 @@ Managing rental contracts and tracking revenue can be a cumbersome process, ofte
 - `Tenant`: Stores tenant information, including authentication credentials.
 
 ### Project Requirements
-- **Authentication and Authorization**: Implement authentication and authorization mechanisms to secure the API and ensure that only authorized landlords and tenants can access and modify data. One landlord can be multiple personnels.
+- **Authentication and Authorization**: The project implements authentication and authorization mechanisms to secure the API and ensure that only authorized landlords and tenants can access and modify data. This is achieved through the use of middleware functions that verify the user's role before allowing them to perform certain actions.
 - **2 Sets of CRUD Routes**: The project includes CRUD routes for managing contracts and user accounts (landlords and tenants).
 - **Indexes for Performance and Uniqueness**: Implement appropriate indexes on database collections to improve query performance and enforce uniqueness constraints where necessary.
-- **Text Search, Aggregations, and Lookups**: Utilize MongoDB's text search, aggregations, and lookup functionality to provide advanced querying and data analysis capabilities on contracts
-- **Thorough Testing (Coverage > 80%)**: Implement comprehensive unit tests and integration tests to ensure code quality and maintainability, with a target test coverage of at least 80%.
+- **Text Search, Aggregations, and Lookups**: The project utilizes MongoDB's text search, aggregations, and lookup functionality to provide advanced querying and data analysis capabilities on contracts. This allows landlords to easily search for contracts based on various criteria and analyze contract data to gain insights into their business.
+- **Thorough Testing (Coverage > 80%)**: The project implements comprehensive unit tests and integration tests to ensure code quality and maintainability, with a target test coverage of at least 80%. The tests cover all major functionalities of the application, including the routes, data models, and middleware functions.
 
-## Timeline
+## Self-Evaluation
 
-### Done as of May 26
-- Set up project structure and dependencies
-- Implement user authentication and authorization
-- Design and implement data models for contracts, landlords, and tenants
-- Implement CRUD routes for managing contracts
+### Approach and Results
+Our approach to this project was to create a user-friendly API that automates the process of managing rental contracts. We focused on providing a centralized platform for landlords to create, distribute, and track rental contracts. The results have been positive, with the API successfully automating many of the tasks that were previously done manually.
 
-### Week 8
-- Set up project structure and dependencies
-- Implement user authentication and authorization
-- Design and implement data models for contracts, landlords, and tenants
-- Implement CRUD routes for managing contracts
+### Lessons Learned
+As a first-time JavaScript programmer, navigating the intricacies of JavaScript syntax and debugging proved to be a substantial hurdle. Additionally, while tools like Postman and MongoDB Compass are invaluable for API development and database management, the initial learning curve required a significant time investment.
 
-### Week 9
-- Implement contract signing and rejection functionality
-- Set up database indexes and perform initial testing
-- Implement revenue projection and reporting functionality
-- Integrate with payment gateway and document signing services (if applicable)
+Thoroughly testing the application, with the goal of exceeding 80% coverage, also demanded more time than anticipated. The complexities of testing asynchronous operations and interactions with external services further contributed to this.
 
-### Week 10
-- Implement text search, aggregations, and lookup functionality
-- Expand test coverage and refine existing tests
-- Finalize documentation and project cleanup
-- Perform final testing and code review
-- Prepare for project presentation and submission
+### Future Improvements
+In the future, we would like to improve the error handling in our API to provide more informative error messages. We would also like to implement a more sophisticated authorization system that allows for different levels of access depending on the user's role. Additionally, we plan to provide more tools for landlords to analyze their contract data and revenue.
+
+Overall, we are proud of what we have achieved with this project and look forward to making further improvements in the future.
